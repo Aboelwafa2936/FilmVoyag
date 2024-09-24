@@ -29,6 +29,7 @@ export default function PersonDetails() {
     overview: string;
     release_date?: string;
     first_air_date?: string;
+    category: string;
   }
 
   const formattedCredits = credits?.map((credit: Credit) => {
@@ -41,8 +42,14 @@ export default function PersonDetails() {
       overview: credit.overview,
       release_date: credit.release_date,
       first_air_date: credit.first_air_date,
+      category: credit.release_date ? "movie" : "tv", // Add category here
     };
   });
+  
+  const category = formattedCredits?.map((formattedCredit: Credit) => {
+    return formattedCredit.category === "movie" ? "movie" : "tv"
+  });
+
 
 
   return (
@@ -65,14 +72,14 @@ export default function PersonDetails() {
             <span>{details?.gender === 1 ? "Female" : "Male"}</span>
             <p className="text-sm font-semibold text-gray-400">Birthday</p>
             <span>{details?.birthday}</span>
-            <p className="text-sm font-semibold text-gray-400">
-              Place of Birth
-            </p>
+            <p className="text-sm font-semibold text-gray-400">Place of Birth</p>
             <span>{details?.place_of_birth}</span>
             <p className="text-sm font-semibold text-gray-400">Also Known As</p>
-            <span className="text-sm">{details?.also_known_as.join(", ")}</span>
+            <span className="text-sm">
+              {details?.also_known_as.join(", ")}
+            </span>
           </div>
-
+  
           {/* Main Content - Biography and Slider */}
           <div className="w-full md:w-4/5 px-6">
             <h2 className="text-3xl font-bold mb-4">{details?.name}</h2>
@@ -86,18 +93,17 @@ export default function PersonDetails() {
               <span className="block text-lg font-semibold mb-4">
                 Known for
               </span>
-
+  
               {/* Check if formattedCredits exists before rendering ImgSlider */}
               {formattedCredits?.length ? (
                 <ImgSlider
-                  category={formattedCredits?.map((formattedCredit: Credit) =>
-                    formattedCredit?.release_date ? "movie" : "tv"
-                  )}
+                category={category}
                   baseUrl={baseUrl}
-                  movieTitle={formattedCredits.map((formattedCredit: Credit) =>
-                    formattedCredit.title
-                      ? formattedCredit.title
-                      : formattedCredit.name
+                  movieTitle={formattedCredits.map(
+                    (formattedCredit: Credit) =>
+                      formattedCredit.title
+                        ? formattedCredit.title
+                        : formattedCredit.name
                   )}
                   movieDescription={formattedCredits.map(
                     (formattedCredit: Credit) => formattedCredit.overview
