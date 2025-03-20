@@ -4,7 +4,7 @@ FilmVoyage is a React + TypeScript + Vite project for browsing and exploring mov
 
 ## Demo
 
-🔗 [View Live Demo](https://Aboelwafa2936.github.io/FilmVoya/)
+🔗 [View Live Demo](https://Aboelwafa2936.github.io/FilmVoyag/)
 
 ## Repository
 
